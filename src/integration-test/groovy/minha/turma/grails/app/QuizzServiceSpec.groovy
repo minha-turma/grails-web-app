@@ -7,37 +7,37 @@ import org.hibernate.SessionFactory
 
 @Integration
 @Rollback
-class QuizzServiceSpec extends Specification {
+class QuizServiceSpec extends Specification {
 
-    QuizzService quizzService
+    QuizService quizService
     SessionFactory sessionFactory
 
     private Long setupData() {
         // TODO: Populate valid domain instances and return a valid ID
-        //new Quizz(...).save(flush: true, failOnError: true)
-        //new Quizz(...).save(flush: true, failOnError: true)
-        //Quizz quizz = new Quizz(...).save(flush: true, failOnError: true)
-        //new Quizz(...).save(flush: true, failOnError: true)
-        //new Quizz(...).save(flush: true, failOnError: true)
+        //new Quiz(...).save(flush: true, failOnError: true)
+        //new Quiz(...).save(flush: true, failOnError: true)
+        //Quiz quiz = new Quiz(...).save(flush: true, failOnError: true)
+        //new Quiz(...).save(flush: true, failOnError: true)
+        //new Quiz(...).save(flush: true, failOnError: true)
         assert false, "TODO: Provide a setupData() implementation for this generated test suite"
-        //quizz.id
+        //quiz.id
     }
 
     void "test get"() {
         setupData()
 
         expect:
-        quizzService.get(1) != null
+        quizService.get(1) != null
     }
 
     void "test list"() {
         setupData()
 
         when:
-        List<Quizz> quizzList = quizzService.list(max: 2, offset: 2)
+        List<Quiz> quizList = quizService.list(max: 2, offset: 2)
 
         then:
-        quizzList.size() == 2
+        quizList.size() == 2
         assert false, "TODO: Verify the correct instances are returned"
     }
 
@@ -45,30 +45,30 @@ class QuizzServiceSpec extends Specification {
         setupData()
 
         expect:
-        quizzService.count() == 5
+        quizService.count() == 5
     }
 
     void "test delete"() {
-        Long quizzId = setupData()
+        Long quizId = setupData()
 
         expect:
-        quizzService.count() == 5
+        quizService.count() == 5
 
         when:
-        quizzService.delete(quizzId)
+        quizService.delete(quizId)
         sessionFactory.currentSession.flush()
 
         then:
-        quizzService.count() == 4
+        quizService.count() == 4
     }
 
     void "test save"() {
         when:
         assert false, "TODO: Provide a valid instance to save"
-        Quizz quizz = new Quizz()
-        quizzService.save(quizz)
+        Quiz quiz = new Quiz()
+        quizService.save(quiz)
 
         then:
-        quizz.id != null
+        quiz.id != null
     }
 }

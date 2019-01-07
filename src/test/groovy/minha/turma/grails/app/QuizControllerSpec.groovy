@@ -1,9 +1,9 @@
 package minha.turma.grails.app
 
-import grails.testing.gorm.DomainUnitTest
+import grails.testing.web.controllers.ControllerUnitTest
 import spock.lang.Specification
 
-class QuizzSpec extends Specification implements DomainUnitTest<Quizz> {
+class QuizControllerSpec extends Specification implements ControllerUnitTest<QuizController> {
 
     def setup() {
     }
@@ -13,6 +13,6 @@ class QuizzSpec extends Specification implements DomainUnitTest<Quizz> {
 
     void "test something"() {
         expect:"fix me"
-            true == false
+        true == false
     }
 }

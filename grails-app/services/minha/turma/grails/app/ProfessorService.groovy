@@ -3,16 +3,16 @@ package minha.turma.grails.app
 import grails.gorm.services.Service
 
 @Service(Professor)
-interface ProfessorService {
+abstract class ProfessorService {
 
-    Professor get(Serializable id)
+    abstract Professor get(Serializable id);
 
-    List<Professor> list(Map args)
+    abstract List<Professor> list(Map args)
 
-    Long count()
+    abstract Long count()
 
-    void delete(Serializable id)
+    abstract void delete(Serializable id)
 
-    Professor save(Professor professor)
+    abstract Professor save(Professor professor)
 
 }

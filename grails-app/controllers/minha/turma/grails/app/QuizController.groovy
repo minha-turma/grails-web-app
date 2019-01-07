@@ -4,51 +4,57 @@ import grails.converters.JSON
 import grails.validation.ValidationException
 import static org.springframework.http.HttpStatus.*
 
-class QuizzController {
+class QuizController {
 
-    QuizzService quizzService
+    QuizService quizService
+    def springSecurityService
 
     static responseFormats = ['json', 'xml']
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
     def index(Integer max) {
-        render quizzService.list() as JSON
+        User owner = springSecurityService.currentUser
+
+        render Quiz.findAllByOwner(owner) as JSON
     }
 
     def show(Long id) {
-        render quizzService.get(id) as JSON
+        render quizService.get(id) as JSON
     }
 
-    def save(Quizz quizz) {
-        if (quizz == null) {
+    def save(Quiz quiz) {
+        if (quiz == null) {
+            render status: NOT_FOUND
+            return
+        }
+
+        User owner = springSecurityService.currentUser
+        quiz.owner = owner;
+
+        try {
+            quizService.save(quiz)
+        } catch (ValidationException e) {
+            respond quiz.errors, view:'create'
+            return
+        }
+
+        render quiz as JSON
+    }
+
+    def update(Quiz quiz) {
+        if (quiz == null) {
             render status: NOT_FOUND
             return
         }
 
         try {
-            quizzService.save(quizz)
+            quizService.save(quiz)
         } catch (ValidationException e) {
-            respond quizz.errors, view:'create'
+            respond quiz.errors, view:'edit'
             return
         }
 
-        render quizz as JSON
-    }
-
-    def update(Quizz quizz) {
-        if (quizz == null) {
-            render status: NOT_FOUND
-            return
-        }
-
-        try {
-            quizzService.save(quizz)
-        } catch (ValidationException e) {
-            respond quizz.errors, view:'edit'
-            return
-        }
-
-        render quizz as JSON
+        render quiz as JSON
     }
 
     def delete(Long id) {
@@ -57,7 +63,7 @@ class QuizzController {
             return
         }
 
-        quizzService.delete(id)
+        quizService.delete(id)
 
         render status: NO_CONTENT
     }
