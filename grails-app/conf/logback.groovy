@@ -22,6 +22,10 @@ appender('STDOUT', ConsoleAppender) {
     }
 }
 
+root INFO, ['STDOUT']
+
+logger 'org.springframework.security', DEBUG
+
 def targetDir = BuildSettings.TARGET_DIR
 if (Environment.isDevelopmentMode() && targetDir != null) {
     appender("FULL_STACKTRACE", FileAppender) {
@@ -33,4 +37,3 @@ if (Environment.isDevelopmentMode() && targetDir != null) {
     }
     logger("StackTrace", ERROR, ['FULL_STACKTRACE'], false)
 }
-root(ERROR, ['STDOUT'])
