@@ -2,6 +2,9 @@ package minha.turma.grails.app
 
 import grails.converters.JSON
 import grails.validation.ValidationException
+import org.grails.web.json.JSONArray
+import org.grails.web.json.JSONObject
+
 import static org.springframework.http.HttpStatus.*
 
 class StudentController {
@@ -20,20 +23,40 @@ class StudentController {
         render studentService.get(id) as JSON
     }
 
-    def save(Student student) {
-        if (student == null) {
-            render status: NOT_FOUND
-            return
-        }
+    /*
+    * This action is designed to handle single and bulk inserts.
+    * If a single object is sent through the body, than a single insert is performed.
+    * Otherwise, if an array of object is sent, than a bulk insert of the items is performed.
+    * */
+    def save() {
+        if (request.JSON instanceof JSONObject) {
+            Student student = new Student(request.JSON)
 
-        try {
+            if (!student.validate()) {
+                render (status: BAD_REQUEST, text: student.errors)
+            }
+
             studentService.save(student)
-        } catch (ValidationException e) {
-            render student.errors, view:'create'
-            return
-        }
 
-        render student as JSON
+            render(text: student, contentType: "application/json", status: CREATED)
+        }
+        else if (request.JSON instanceof JSONArray) {
+
+            List<Student> students = []
+
+            request.JSON.each {
+                Student student = new Student(it)
+
+                if (!student.validate()) {
+                    render (status: BAD_REQUEST, text: student.errors)
+                }
+
+                students.add(student)
+            }
+
+            studentService.save(students)
+            render(text: students as JSON, contentType: "application/json", status: CREATED)
+        }
     }
 
     def update(Student student) {

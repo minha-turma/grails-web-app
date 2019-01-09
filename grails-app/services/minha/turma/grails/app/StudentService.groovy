@@ -1,18 +1,28 @@
 package minha.turma.grails.app
 
 import grails.gorm.services.Service
+import grails.gorm.transactions.Transactional
 
 @Service(Student)
-interface StudentService {
+abstract class StudentService {
 
-    Student get(Serializable id)
+    abstract Student get(Serializable id)
 
-    List<Student> list(Map args)
+    abstract List<Student> list(Map args)
 
-    Long count()
+    abstract Long count()
 
-    void delete(Serializable id)
+    @Transactional
+    abstract void delete(Serializable id)
 
-    Student save(Student student)
+    @Transactional
+    abstract Student save(Student student)
+
+    @Transactional
+    List<Student> save(List<Student> students) {
+        students.each {
+            it.save()
+        }
+    }
 
 }

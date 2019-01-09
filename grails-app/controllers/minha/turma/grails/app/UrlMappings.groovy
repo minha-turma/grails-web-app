@@ -14,9 +14,9 @@ class UrlMappings {
         "500"(view: '/error')
         "404"(view: '/notFound')
 
-//        /* PROFESSOR API */
-//        group "/professor", {
-//            "/login"(controller:"Professor", id:"login", action: "login")
-//        }
+        /* STUDENT API */
+        group "/student", {
+            "/saveBulk"(controller:"Professor", id:"saveBulk", action: "saveBulk")
+        }
     }
 }
