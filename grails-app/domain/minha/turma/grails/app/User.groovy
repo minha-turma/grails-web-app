@@ -12,8 +12,12 @@ class User implements Serializable {
 
 	transient springSecurityService
 
+	String name
 	String username
 	String password
+
+	SchoolClass schoolClass
+
 	boolean enabled = true
 	boolean accountExpired
 	boolean accountLocked
@@ -47,8 +51,10 @@ class User implements Serializable {
 	static transients = ['springSecurityService']
 
 	static constraints = {
+		name blank: false
 		username blank: false, unique: true
 		password blank: false
+		schoolClass (nullable: true)
 	}
 
 	static mapping = {

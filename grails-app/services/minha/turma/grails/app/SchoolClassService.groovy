@@ -3,16 +3,16 @@ package minha.turma.grails.app
 import grails.gorm.services.Service
 
 @Service(SchoolClass)
-interface SchoolClassService {
+abstract class SchoolClassService {
 
-    SchoolClass get(Serializable id)
+    abstract SchoolClass get(Serializable id)
 
-    List<SchoolClass> list(Map args)
+    abstract List<SchoolClass> list(Map args)
 
-    Long count()
+    abstract Long count()
 
-    void delete(Serializable id)
+    abstract void delete(Serializable id)
 
-    SchoolClass save(SchoolClass schoolClass)
+    abstract SchoolClass save(SchoolClass schoolClass)
 
 }

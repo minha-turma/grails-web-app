@@ -7,9 +7,9 @@ import org.hibernate.SessionFactory
 
 @Integration
 @Rollback
-class StudentServiceSpec extends Specification {
+class UserServiceSpec extends Specification {
 
-    StudentService studentService
+    UserService studentService
     SessionFactory sessionFactory
 
     private Long setupData() {

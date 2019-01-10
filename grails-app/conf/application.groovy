@@ -17,8 +17,8 @@ grails.plugin.springsecurity.interceptUrlMap = [
 	[pattern: '/**/images/**',   	access: ['permitAll']],
 	[pattern: '/**/favicon.ico', 	access: ['permitAll']],
 	[pattern: '/api/login',  	 	access: ['permitAll']],
-	[pattern: '/api/professor/**',  access: ['ROLE_ADMIN']],
-	[pattern: '/api/quiz/**',   	access: ['ROLE_ADMIN', 'ROLE_USER']],
+	[pattern: '/api/user/**',  		access: ['ROLE_ADMIN']],
+	[pattern: '/api/quiz/**',   	access: ['ROLE_ADMIN', 'ROLE_USER', 'ROLE_STUDENT']],
 	[pattern: '/api/student/**',   	access: ['ROLE_ADMIN', 'ROLE_USER']]
 ]
 

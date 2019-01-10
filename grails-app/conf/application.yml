@@ -84,7 +84,7 @@ dataSource:
 environments:
     development:
         dataSource:
-            dbCreate: create
+            dbCreate: create-drop
             url: jdbc:mysql://127.0.0.1:3306/minhaturma
     test:
         dataSource:
