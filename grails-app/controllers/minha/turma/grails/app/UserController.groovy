@@ -14,8 +14,7 @@ class UserController {
     static responseFormats = ['json', 'xml']
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
-    def index(Integer max) {
-        params.max = Math.min(max ?: 10, 100)
+    def index() {
         render userService.list(params) as JSON
     }
 
@@ -45,7 +44,21 @@ class UserController {
             List<User> students = []
 
             request.JSON.each {
-                User student = new User(it)
+
+                Role[] roles = []
+                it['authorities'].each { authority ->
+                    Role role = Role.findByAuthority(authority)
+                    roles = roles + (role ? role : [])
+                }
+
+                User student = new User(
+                        name: it.name,
+                        username: it.username,
+                        password: it.password,
+                        schoolClass: it.schoolClass
+                )
+
+                student.roles = roles
 
                 if (!student.validate()) {
                     render (status: BAD_REQUEST, text: student.errors)

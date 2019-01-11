@@ -6,6 +6,16 @@ class BootStrap {
 
     def init = { servletContext ->
 
+        JSON.registerObjectMarshaller(User) {
+            def output = [:]
+            output['id'] = it.id
+            output['name'] = it.name
+            output['username'] = it.username
+            output['schoolClass'] = ["id": it?.schoolClass?.id, "name": it?.schoolClass?.name]
+
+            return output
+        }
+
         // Create application roles
         Role adminRole = new Role('ROLE_ADMIN').save()
         Role professorRole = new Role('ROLE_PROFESSOR').save()

@@ -38,6 +38,10 @@ abstract class UserService {
 
             it.schoolClass = schoolClass
             it.save()
+
+            it.roles.each { role ->
+                UserRole.create(it, role).save()
+            }
         }
     }
 
