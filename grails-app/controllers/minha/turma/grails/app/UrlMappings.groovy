@@ -15,8 +15,8 @@ class UrlMappings {
         "404"(controller: 'root', action:'index')
 
         /* STUDENT API */
-        group "/student", {
-            "/saveBulk"(controller:"Professor", id:"saveBulk", action: "saveBulk")
+        group "/user", {
+            "/me"(controller:"User", id:"me", action: "me")
         }
     }
 
