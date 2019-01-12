@@ -8,6 +8,8 @@ grails:
             # Whether to translate GORM events into Reactor events
             # Disabled by default for performance reasons
             events: false
+    resources:
+        pattern: '/**'
 info:
     app:
         name: '@info.app.name@'
@@ -63,7 +65,6 @@ grails:
         encoding: UTF-8
     plugin.springsecurity:
         rest.token.storage.jwt.secret: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'
-
     cors:
         enabled: true
 

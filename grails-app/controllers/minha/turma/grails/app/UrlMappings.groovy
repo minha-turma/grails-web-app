@@ -10,13 +10,22 @@ class UrlMappings {
         put     "/api/$controller/$id(.$format)?"(action:"update")
         patch   "/api/$controller/$id(.$format)?"(action:"patch")
 
-        "/"(controller: 'application', action:'index')
+        "/"(controller: 'root', action:'index')
         "500"(view: '/error')
-        "404"(view: '/notFound')
+        "404"(controller: 'root', action:'index')
 
         /* STUDENT API */
         group "/student", {
             "/saveBulk"(controller:"Professor", id:"saveBulk", action: "saveBulk")
         }
     }
+
+    static excludes = [
+        '/css/*',
+        '/fonts/*',
+        '/static/*',
+        '/asset-manifest.json',
+        '/favicon.ico'
+    ]
+
 }
