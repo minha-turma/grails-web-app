@@ -78,8 +78,15 @@ var routes = [
     },
     {
         path: '',
-        redirectTo: '/login',
+        redirectTo: '/class-list',
         pathMatch: 'full'
+    },
+    {
+        path: '404',
+        component: _classes_class_list_component__WEBPACK_IMPORTED_MODULE_3__["ClassListComponent"]
+    },
+    { path: '**',
+        redirectTo: '/class-list'
     }
 ];
 var AppRoutingModule = /** @class */ (function () {
@@ -781,6 +788,9 @@ var AuthService = /** @class */ (function () {
             localStorage.setItem('access_token', result.access_token);
         }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(function () { return true; }));
     };
+    AuthService.prototype.isLoggedId = function () {
+        return localStorage.getItem('access_token');
+    };
     AuthService.prototype.logout = function () {
         localStorage.removeItem('access_token');
         this.router.navigate(['/login']);
@@ -869,6 +879,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm5/index.js");
+
+
 
 
 
@@ -877,22 +891,23 @@ var HttpsRequestInterceptor = /** @class */ (function () {
     function HttpsRequestInterceptor(router) {
         this.router = router;
     }
-    HttpsRequestInterceptor.prototype.intercept = function (req, next) {
-        if (req.url.indexOf('login') > 0) {
-            return next.handle(req);
+    HttpsRequestInterceptor.prototype.intercept = function (request, next) {
+        var _this = this;
+        var token = localStorage.getItem('access_token');
+        if (token) {
+            request = request.clone({ headers: request.headers.set('Authorization', token) });
         }
-        var access_token = localStorage.getItem('access_token');
-        // Set Authoziation header if logged in. Redirect to login otherwise
-        if (access_token) {
-            var interceptedReq = req.clone({
-                headers: req.headers.set('Authorization', access_token),
-            });
-            return next.handle(interceptedReq);
+        if (!request.headers.has('Content-Type')) {
+            request = request.clone({ headers: request.headers.set('Content-Type', 'application/json') });
         }
-        else {
-            this.router.navigate(['/login']);
-            return next.handle(req);
-        }
+        request = request.clone({ headers: request.headers.set('Accept', 'application/json') });
+        return next.handle(request).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["map"])(function (event) {
+            return event;
+        }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["catchError"])(function (err) {
+            // Error processing request (Forbidden, Unauthorized ...)
+            _this.router.navigate(['/login']);
+            return Object(rxjs__WEBPACK_IMPORTED_MODULE_5__["throwError"])(err);
+        }));
     };
     HttpsRequestInterceptor = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])(),
@@ -1003,6 +1018,9 @@ var LoginComponent = /** @class */ (function () {
         this.router = router;
     }
     LoginComponent.prototype.ngOnInit = function () {
+        if (this.authService.isLoggedId()) {
+            this.router.navigate(['class-list']);
+        }
     };
     LoginComponent.prototype.login = function () {
         var _this = this;
