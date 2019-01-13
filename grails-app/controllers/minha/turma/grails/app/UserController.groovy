@@ -51,11 +51,12 @@ class UserController {
                     roles = roles + (role ? role : [])
                 }
 
-                User student = new User(
+                Student student = new Student(
                         name: it.name,
                         username: it.username,
                         password: it.password,
-                        schoolClass: it.schoolClass
+                        schoolClass: it.schoolClass,
+                        feeling: Student.Feeling.Happy
                 )
 
                 student.roles = roles
@@ -70,6 +71,10 @@ class UserController {
             userService.save(students)
             render(text: students as JSON, contentType: "application/json", status: CREATED)
         }
+    }
+
+    def student() {
+        render userService.listStudents() as JSON
     }
 
     def update(User student) {

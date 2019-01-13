@@ -12,6 +12,10 @@ abstract class UserService {
 
     abstract List<User> list(Map args)
 
+    List<Student> listStudents() {
+        return Student.list()
+    }
+
     abstract Long count()
 
     @Transactional

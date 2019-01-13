@@ -2,53 +2,56 @@ package minha.turma.grails.app
 
 import grails.converters.JSON
 import grails.validation.ValidationException
-import static org.springframework.http.HttpStatus.*
 
-class SchoolClassController {
+import static org.springframework.http.HttpStatus.NOT_FOUND
+import static org.springframework.http.HttpStatus.NO_CONTENT
 
-    SchoolClassService schoolClassService
+class LectureController {
+
+    LectureService lectureService
 
     static responseFormats = ['json', 'xml']
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
-    def index() {
-        render schoolClassService.list() as JSON
+    def index(Integer max) {
+        params.max = Math.min(max ?: 10, 100)
+        render lectureService.list(params) as JSON
     }
 
     def show(Long id) {
-        render schoolClassService.get(id) as JSON
+        render lectureService.get(id) as JSON
     }
 
-    def save(SchoolClass schoolClass) {
-        if (schoolClass == null) {
+    def save(Lecture lecture) {
+        if (lecture == null) {
             render status: NOT_FOUND
             return
         }
 
         try {
-            schoolClassService.save(schoolClass)
+            lectureService.save(lecture)
         } catch (ValidationException e) {
-            render schoolClass.errors, view:'create'
+            render lecture.errors
             return
         }
 
-        render schoolClass  as JSON
+        render lecture  as JSON
     }
 
-    def update(SchoolClass schoolClass) {
-        if (schoolClass == null) {
+    def update(Lecture lecture) {
+        if (lecture == null) {
             render status: NOT_FOUND
             return
         }
 
         try {
-            schoolClassService.save(schoolClass)
+            lectureService.save(lecture)
         } catch (ValidationException e) {
-            render schoolClass.errors, view:'edit'
+            render lecture.errors, view:'edit'
             return
         }
 
-        render schoolClass as JSON
+        render lecture as JSON
     }
 
     def delete(Long id) {
@@ -57,7 +60,7 @@ class SchoolClassController {
             return
         }
 
-        schoolClassService.delete(id)
+        lectureService.delete(id)
 
         render status: NO_CONTENT
     }
