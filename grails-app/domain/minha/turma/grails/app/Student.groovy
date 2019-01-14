@@ -20,9 +20,13 @@ class Student extends User {
 	Feeling feeling
 	SchoolClass schoolClass
 
+	double presence
+
 	static constraints = {
 		feeling (nullable: true)
 		schoolClass (nullable: true)
 	}
+
+	static transients = ['presence']
 
 }

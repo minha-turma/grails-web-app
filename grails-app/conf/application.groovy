@@ -23,7 +23,8 @@ grails.plugin.springsecurity.interceptUrlMap = [
 	[pattern: '/api/professor/**',  access: ['ROLE_ADMIN']],
 	[pattern: '/api/subject/**', 	access: ['ROLE_ADMIN']],
 	[pattern: '/api/lecture/**',  	access: ['ROLE_ADMIN']],
-	[pattern: '/api/schoolClass/**',access: ['ROLE_ADMIN']]
+	[pattern: '/api/schoolClass/**',access: ['ROLE_ADMIN']],
+	[pattern: '/api/presence/**',	access: ['ROLE_ADMIN']]
 ]
 
 grails.plugin.springsecurity.filterChain.chainMap = [

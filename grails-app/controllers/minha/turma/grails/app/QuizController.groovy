@@ -12,7 +12,7 @@ class QuizController {
     static responseFormats = ['json', 'xml']
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
-    def index(Integer max) {
+    def index() {
         User owner = springSecurityService.currentUser
 
         render Quiz.findAllByOwner(owner) as JSON

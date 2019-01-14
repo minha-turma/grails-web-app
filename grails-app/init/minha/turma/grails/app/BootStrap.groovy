@@ -21,6 +21,7 @@ class BootStrap {
             output['name'] = it.name
             output['username'] = it.username
             output['feeling'] = it?.feeling?.name
+            output['presence'] = it?.presence
             output['schoolClass'] = ["id": it?.schoolClass?.id, "name": it?.schoolClass?.name]
 
             return output
@@ -38,16 +39,12 @@ class BootStrap {
 
         // Create application roles
         Role adminRole = new Role('ROLE_ADMIN').save()
-        Role studentRole = new Role('ROLE_STUDENT').save()
 
         // Create test users
         Professor admin = new Professor(name: 'Admin', username: 'admin', password: 'admin', authorities: [adminRole]).save()
-        Professor professor = new Professor(name: 'Professor', username: 'professor', password: 'professor', authorities: [adminRole]).save()
-        Student student = new Student(name: 'Student', username: 'student', password: 'student', feeling: Student.Feeling.Happy, authorities: [studentRole]).save()
 
         // Associate users to roles
         new UserRole(user: admin, role: adminRole).save()
-        new UserRole(user: student, role: studentRole).save()
 
         new Quiz(statement: "Quem descobriu o Brasil", alternatives: ["Pedro", "Aecia", "Lula", "Dilma"], correct: 0, owner: admin).save()
         new Quiz(statement: "Quem é o atual presidente do Brasil?", alternatives: ["Dilma", "Aecio", "Bolsonaro", "Lula"], correct: 0, owner: admin).save()

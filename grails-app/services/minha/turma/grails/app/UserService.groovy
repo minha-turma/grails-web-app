@@ -8,12 +8,26 @@ abstract class UserService {
 
     def sessionFactory
 
+    PresenceService presenceService
+
     abstract User get(Serializable id)
 
     abstract List<User> list(Map args)
 
     List<Student> listStudents() {
-        return Student.list()
+
+        List<Student> students = Student.list()
+
+        students.each {
+            List<Lecture> lectures = Lecture.findAllBySchoolClass(it.schoolClass)
+            if (lectures.size() > 0) {
+                List<Presence> presences = Presence.findAllByStudentAndLectureInList(it, lectures)
+                it.presence = presences.isEmpty() ? 0 : (presences.size() / lectures.size()) * 100
+            }
+
+        }
+
+        return students
     }
 
     abstract Long count()

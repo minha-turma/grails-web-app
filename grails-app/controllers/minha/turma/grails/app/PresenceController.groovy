@@ -6,51 +6,51 @@ import grails.validation.ValidationException
 import static org.springframework.http.HttpStatus.NOT_FOUND
 import static org.springframework.http.HttpStatus.NO_CONTENT
 
-class LectureController {
+class PresenceController {
 
-    LectureService lectureService
+    PresenceService presenceService
 
     static responseFormats = ['json', 'xml']
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
     def index() {
-        render lectureService.list() as JSON
+        render presenceService.list() as JSON
     }
 
     def show(Long id) {
-        render lectureService.get(id) as JSON
+        render presenceService.get(id) as JSON
     }
 
-    def save(Lecture lecture) {
-        if (lecture == null) {
+    def save(Presence presence) {
+        if (presence == null) {
             render status: NOT_FOUND
             return
         }
 
         try {
-            lectureService.save(lecture)
+            presenceService.save(presence)
         } catch (ValidationException e) {
-            render lecture.errors
+            render presence.errors
             return
         }
 
-        render lecture  as JSON
+        render presence  as JSON
     }
 
-    def update(Lecture lecture) {
-        if (lecture == null) {
+    def update(Presence presence) {
+        if (presence == null) {
             render status: NOT_FOUND
             return
         }
 
         try {
-            lectureService.save(lecture)
+            presenceService.save(presence)
         } catch (ValidationException e) {
-            render lecture.errors, view:'edit'
+            render presence.errors, view:'edit'
             return
         }
 
-        render lecture as JSON
+        render presence as JSON
     }
 
     def delete(Long id) {
@@ -59,7 +59,7 @@ class LectureController {
             return
         }
 
-        lectureService.delete(id)
+        presenceService.delete(id)
 
         render status: NO_CONTENT
     }

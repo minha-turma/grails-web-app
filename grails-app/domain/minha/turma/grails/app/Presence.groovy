@@ -6,5 +6,8 @@ class Presence {
     Lecture lecture
 
     static constraints = {
+        student (unique: ['lecture'])
+        student (nullable: false)
+        lecture (nullable: false)
     }
 }
