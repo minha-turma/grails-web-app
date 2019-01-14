@@ -35,6 +35,10 @@ class SchoolClassController {
         render schoolClass  as JSON
     }
 
+    def count() {
+        render schoolClassService.count()
+    }
+
     def update(SchoolClass schoolClass) {
         if (schoolClass == null) {
             render status: NOT_FOUND

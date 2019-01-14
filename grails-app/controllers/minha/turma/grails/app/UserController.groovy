@@ -93,6 +93,10 @@ class UserController {
         render student as JSON
     }
 
+    def count() {
+        render userService.countStudents()
+    }
+
     def delete(Long id) {
         if (id == null) {
             render status: NOT_FOUND

@@ -3,16 +3,20 @@ package minha.turma.grails.app
 import grails.gorm.services.Service
 
 @Service(Quiz)
-interface QuizService {
+abstract class QuizService {
 
-    Quiz get(Serializable id)
+    abstract Quiz get(Serializable id)
 
-    List<Quiz> list(Map args)
+    abstract List<Quiz> list(Map args)
 
-    Long count()
+    abstract Long count()
 
-    void delete(Serializable id)
+    abstract void delete(Serializable id)
 
-    Quiz save(Quiz quiz)
+    abstract Quiz save(Quiz quiz)
+
+    int countByOwner(User owner) {
+        Quiz.countByOwner(owner)
+    }
 
 }

@@ -32,6 +32,10 @@ abstract class UserService {
 
     abstract Long count()
 
+    Long countStudents() {
+        return Student.count()
+    }
+
     @Transactional
     abstract void delete(Serializable id)
 

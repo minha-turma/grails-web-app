@@ -17,6 +17,22 @@ class UrlMappings {
         /* STUDENT API */
         group "/api/user", {
             "/student"(controller:"User", id:"student", action: "student")
+            "/count"(controller:"User", id:"count", action: "count")
+        }
+
+        /* QUIZ API */
+        group "/api/quiz", {
+            "/count"(controller:"Quiz", id:"count", action: "count")
+        }
+
+        /* SCHOOL CLASS API */
+        group "/api/schoolClass", {
+            "/count"(controller:"SchoolClass", id:"count", action: "count")
+        }
+
+        /* PRESENCE API */
+        group "/api/presence", {
+            "/average"(controller:"Presence", id:"average", action: "average")
         }
     }
 

@@ -14,7 +14,6 @@ class QuizController {
 
     def index() {
         User owner = springSecurityService.currentUser
-
         render Quiz.findAllByOwner(owner) as JSON
     }
 
@@ -39,6 +38,11 @@ class QuizController {
         }
 
         render quiz as JSON
+    }
+
+    def count() {
+        User owner = springSecurityService.currentUser
+        render quizService.countByOwner(owner)
     }
 
     def update(Quiz quiz) {

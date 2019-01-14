@@ -63,4 +63,8 @@ class PresenceController {
 
         render status: NO_CONTENT
     }
+
+    def average() {
+        render presenceService.average()
+    }
 }
