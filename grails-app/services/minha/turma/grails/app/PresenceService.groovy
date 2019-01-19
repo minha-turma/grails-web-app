@@ -15,10 +15,8 @@ abstract class PresenceService {
     abstract Long count()
 
     double average() {
-        int lectureCount = lectureService.count()
-        int presencesCount = Presence.count()
-        int studentsCount = Student.count()
-        return 0
+        List<Student> students = userService.listStudents()
+        return students.size()
     }
 
     abstract void delete(Serializable id)
