@@ -16,7 +16,16 @@ abstract class PresenceService {
 
     double average() {
         List<Student> students = userService.listStudents()
-        return students.size()
+        double avg = 0
+
+        if (!students.isEmpty()) {
+            students.each {
+                avg += it.presence
+            }
+            avg = avg / students.size()
+        }
+
+        return avg
     }
 
     abstract void delete(Serializable id)

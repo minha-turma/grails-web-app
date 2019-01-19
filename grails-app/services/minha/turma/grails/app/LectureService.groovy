@@ -13,6 +13,6 @@ abstract class LectureService {
 
     abstract void delete(Serializable id)
 
-    abstract Lecture save(Lecture schoolClass)
+    abstract Lecture save(Lecture lecture)
 
 }

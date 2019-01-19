@@ -48,6 +48,16 @@ class BootStrap {
             return output
         }
 
+        JSON.registerObjectMarshaller(Confidence) {
+            def output = [:]
+            output['id'] = it.id
+            output['status'] = it.status.name
+            output['student'] = ["id": it?.student?.id, "name": it?.student?.name]
+            output['subject'] = ["id": it?.subject?.id, "name": it?.subject?.name]
+
+            return output
+        }
+
         // Create application roles
         Role adminRole = new Role('ROLE_ADMIN').save()
 
@@ -62,6 +72,14 @@ class BootStrap {
         new Quiz(statement: "1+1?", alternatives: ["1", "2", "3", "4"], correct: 0, owner: admin).save()
         new Quiz(statement: "Qual a cor do céu?", alternatives: ["Azul", "Amarelo", "Vermelho", "Laranja"], correct: 0, owner: admin).save()
         new Quiz(statement: "Coletivo de abelha", alternatives: ["Enxame", "Alcateia", "Gado", "Cardume"], correct: 0, owner: admin).save()
+
+        new Subject(name: "Matemática").save()
+        new Subject(name: "Português").save()
+        new Subject(name: "História").save()
+        new Subject(name: "Geografia").save()
+        new Subject(name: "Artes").save()
+        new Subject(name: "Inglês").save()
+        new Subject(name: "Ciências").save()
 
     }
     def destroy = {

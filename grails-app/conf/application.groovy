@@ -19,13 +19,14 @@ grails.plugin.springsecurity.interceptUrlMap = [
 	[pattern: '/api/login',  	 	access: ['permitAll']],
 	[pattern: '/api/user/**',  		access: ['ROLE_ADMIN']],
 	[pattern: '/api/quiz/**',   	access: ['ROLE_ADMIN', 'ROLE_STUDENT']],
-	[pattern: '/api/student/**',   	access: ['ROLE_ADMIN']],
-	[pattern: '/api/professor/**',  access: ['ROLE_ADMIN']],
-	[pattern: '/api/subject/**', 	access: ['ROLE_ADMIN']],
-	[pattern: '/api/lecture/**',  	access: ['ROLE_ADMIN']],
-	[pattern: '/api/schoolClass/**',access: ['ROLE_ADMIN']],
-	[pattern: '/api/presence/**',	access: ['ROLE_ADMIN']],
-	[pattern: '/api/message/**',	access: ['ROLE_ADMIN']]
+	[pattern: '/api/student/**',   	access: ['ROLE_ADMIN', 'ROLE_STUDENT']],
+	[pattern: '/api/professor/**',  access: ['ROLE_ADMIN', 'ROLE_STUDENT']],
+	[pattern: '/api/subject/**', 	access: ['ROLE_ADMIN', 'ROLE_STUDENT']],
+	[pattern: '/api/lecture/**',  	access: ['ROLE_ADMIN', 'ROLE_STUDENT']],
+	[pattern: '/api/schoolClass/**',access: ['ROLE_ADMIN', 'ROLE_STUDENT']],
+	[pattern: '/api/presence/**',	access: ['ROLE_ADMIN', 'ROLE_STUDENT']],
+	[pattern: '/api/message/**',	access: ['ROLE_ADMIN', 'ROLE_STUDENT']],
+	[pattern: '/api/confidence/**',	access: ['ROLE_ADMIN', 'ROLE_STUDENT']]
 ]
 
 grails.plugin.springsecurity.filterChain.chainMap = [

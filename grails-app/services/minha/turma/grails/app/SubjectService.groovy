@@ -13,6 +13,6 @@ abstract class SubjectService {
 
     abstract void delete(Serializable id)
 
-    abstract Subject save(Subject schoolClass)
+    abstract Subject save(Subject subject)
 
 }
