@@ -2,11 +2,12 @@ package minha.turma.grails.app
 
 import grails.gorm.services.Service
 import grails.gorm.transactions.Transactional
+import grails.util.Holders
 
 @Service(User)
 abstract class UserService {
 
-    def sessionFactory
+    def springSecurityService
 
     PresenceService presenceService
 
@@ -65,6 +66,11 @@ abstract class UserService {
                 UserRole.create(it, role).save()
             }
         }
+    }
+
+    boolean isProfessor() {
+        springSecurityService = Holders.applicationContext.getBean('springSecurityService')
+        springSecurityService.principal.authorities.any({ it.role == 'ROLE_ADMIN'})
     }
 
 }

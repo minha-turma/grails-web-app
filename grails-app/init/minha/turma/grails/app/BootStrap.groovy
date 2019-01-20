@@ -61,6 +61,7 @@ class BootStrap {
 
         // Create application roles
         Role adminRole = new Role('ROLE_ADMIN').save()
+        new Role('ROLE_STUDENT').save()
 
         // Create test users
         Professor admin = new Professor(name: 'Admin', username: 'admin', password: 'admin', authorities: [adminRole]).save()

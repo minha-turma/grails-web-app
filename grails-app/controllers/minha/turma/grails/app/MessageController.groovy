@@ -9,14 +9,22 @@ import static org.springframework.http.HttpStatus.NO_CONTENT
 class MessageController {
 
     MessageService messageService
+    UserService userService
+
     def springSecurityService
 
     static responseFormats = ['json', 'xml']
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
     def index() {
-        User owner = springSecurityService.currentUser
-        render Message.findAllByOwner(owner) as JSON
+        User user = springSecurityService.currentUser
+
+        if (userService.isProfessor()) {
+            render Message.findAllByOwner(user) as JSON
+            return
+        }
+
+        render Message.findAllBySchoolClass(((Student)user).schoolClass) as JSON
     }
 
     def show(Long id) {
