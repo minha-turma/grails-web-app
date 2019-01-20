@@ -11,6 +11,8 @@ class UserController {
 
     UserService userService
 
+    def springSecurityService
+
     static responseFormats = ['json', 'xml']
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
@@ -75,6 +77,10 @@ class UserController {
 
     def student() {
         render userService.listStudents() as JSON
+    }
+
+    def me() {
+        render springSecurityService.currentUser as JSON
     }
 
     def update(User student) {

@@ -9,12 +9,23 @@ import static org.springframework.http.HttpStatus.NO_CONTENT
 class PresenceController {
 
     PresenceService presenceService
+    UserService userService
+
+    def springSecurityService
 
     static responseFormats = ['json', 'xml']
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
     def index() {
-        render presenceService.list() as JSON
+
+        User user = springSecurityService.currentUser
+
+        if (userService.isProfessor()) {
+            render Presence.list() as JSON
+            return
+        }
+
+        render Presence.findAllByStudent(((Student) user)) as JSON
     }
 
     def show(Long id) {

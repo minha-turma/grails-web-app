@@ -28,7 +28,7 @@ class QuizController {
         }
 
         User owner = springSecurityService.currentUser
-        quiz.owner = owner;
+        quiz.owner = owner
 
         try {
             quizService.save(quiz)

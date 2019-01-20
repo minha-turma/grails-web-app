@@ -9,12 +9,23 @@ import static org.springframework.http.HttpStatus.NO_CONTENT
 class LectureController {
 
     LectureService lectureService
+    UserService userService
+    PresenceService presenceService
+
+    def springSecurityService
 
     static responseFormats = ['json', 'xml']
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
     def index() {
-        render lectureService.list() as JSON
+        User user = springSecurityService.currentUser
+
+        if (userService.isProfessor()) {
+            render Lecture.findAllByOwner(user) as JSON
+            return
+        }
+
+        render Lecture.findAllBySchoolClass(((Student)user).schoolClass) as JSON
     }
 
     def show(Long id) {
@@ -26,6 +37,10 @@ class LectureController {
             render status: NOT_FOUND
             return
         }
+
+        User owner = springSecurityService.currentUser
+        lecture.owner = owner
+        lecture.date = new Date()
 
         try {
             lectureService.save(lecture)
@@ -51,6 +66,11 @@ class LectureController {
         }
 
         render lecture as JSON
+    }
+
+    def presence(Long id) {
+        Lecture lecture = Lecture.get(id)
+        render Presence.findAllByLecture(lecture) as JSON
     }
 
     def delete(Long id) {

@@ -33,6 +33,17 @@ class BootStrap {
             output['date'] = it.date
             output['schoolClass'] = ["id": it?.schoolClass?.id, "name": it?.schoolClass?.name]
             output['subject'] = ["id": it?.subject?.id, "name": it?.subject?.name]
+            output['owner'] = ["id": it?.owner?.id, "name": it?.owner?.name]
+            output['isOpen'] = it.isOpen
+
+            return output
+        }
+
+        JSON.registerObjectMarshaller(Presence) {
+            def output = [:]
+            output['id'] = it.id
+            output['student'] = ["id": it?.student?.id, "name": it?.student?.name]
+            output['lecture'] = ["id": it?.lecture?.id, "subject": it?.lecture?.subject]
 
             return output
         }

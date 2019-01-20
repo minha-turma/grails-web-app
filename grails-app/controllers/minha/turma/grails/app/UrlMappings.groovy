@@ -18,6 +18,7 @@ class UrlMappings {
         group "/api/user", {
             "/student"(controller:"User", id:"student", action: "student")
             "/count"(controller:"User", id:"count", action: "count")
+            "/me"(controller:"User", id:"me", action: "me")
         }
 
         /* QUIZ API */
@@ -33,6 +34,11 @@ class UrlMappings {
         /* PRESENCE API */
         group "/api/presence", {
             "/average"(controller:"Presence", id:"average", action: "average")
+        }
+
+        /* LECTURE API */
+        group "/api/lecture", {
+            "/$id/presence"(controller:"Lecture", id:"presence", action: "presence")
         }
     }
 
