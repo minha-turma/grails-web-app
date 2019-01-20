@@ -44,6 +44,7 @@ class BootStrap {
             output['content'] = it.content
             output['schoolClass'] = ["id": it?.schoolClass?.id, "name": it?.schoolClass?.name]
             output['owner'] = ["id": it?.owner?.id, "name": it?.owner?.name]
+            output['date'] = it.date
 
             return output
         }

@@ -31,6 +31,7 @@ class MessageController {
 
         User owner = springSecurityService.currentUser
         message.owner = owner
+        message.date = new Date()
 
         try {
             messageService.save(message)
