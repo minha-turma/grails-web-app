@@ -45,6 +45,10 @@ class QuizController {
         render quizService.countByOwner(owner)
     }
 
+    def answer(Long id) {
+        render Answer.findAllByQuiz(Quiz.get(id)) as JSON
+    }
+
     def update(Quiz quiz) {
         if (quiz == null) {
             render status: NOT_FOUND

@@ -70,6 +70,15 @@ class BootStrap {
             return output
         }
 
+        JSON.registerObjectMarshaller(Answer) {
+            def output = [:]
+            output['id'] = it.id
+            output['student'] = ["id": it?.student?.id, "name": it?.student?.name]
+            output['quiz'] = ["id": it?.quiz?.id, "statement": it?.quiz?.statement, "correct": it?.quiz?.correct]
+            output['choice'] = it.choice
+            return output
+        }
+
         // Create application roles
         Role adminRole = new Role('ROLE_ADMIN').save()
         new Role('ROLE_STUDENT').save()

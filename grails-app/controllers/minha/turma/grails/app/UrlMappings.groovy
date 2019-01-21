@@ -24,6 +24,7 @@ class UrlMappings {
         /* QUIZ API */
         group "/api/quiz", {
             "/count"(controller:"Quiz", id:"count", action: "count")
+            "/$id/answer"(controller:"Quiz", id:"answer", action: "answer")
         }
 
         /* SCHOOL CLASS API */
