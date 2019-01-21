@@ -16,8 +16,8 @@ class Confidence {
     Subject subject
 
     static constraints = {
-        status nullable: false
-        student nullable: false
-        subject nullable: false
+        status (nullable: false)
+        student (nullable: false)
+        subject (nullable: false, unique: ['student'])
     }
 }
