@@ -4,7 +4,7 @@ class Answer {
 
     Quiz quiz
     Student student
-    int choice
+    String choice
 
     static constraints = {
         quiz unique: ['student'], nullable: false

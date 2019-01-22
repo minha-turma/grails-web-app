@@ -7,6 +7,8 @@ import static org.springframework.http.HttpStatus.*
 class QuizController {
 
     QuizService quizService
+    UserService userService
+
     def springSecurityService
 
     static responseFormats = ['json', 'xml']
@@ -14,7 +16,13 @@ class QuizController {
 
     def index() {
         User owner = springSecurityService.currentUser
-        render Quiz.findAllByOwner(owner) as JSON
+
+        if (userService.isProfessor()) {
+            render Quiz.findAllByOwner(owner) as JSON
+            return
+        }
+
+        render Quiz.findAll() as JSON
     }
 
     def show(Long id) {

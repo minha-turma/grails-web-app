@@ -4,7 +4,7 @@ class Quiz {
 
     String statement
     List alternatives
-    int correct
+    String correct
     User owner
 
     static constraints = {

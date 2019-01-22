@@ -89,11 +89,10 @@ class BootStrap {
         // Associate users to roles
         new UserRole(user: admin, role: adminRole).save()
 
-        new Quiz(statement: "Quem descobriu o Brasil", alternatives: ["Pedro", "Aecia", "Lula", "Dilma"], correct: 0, owner: admin).save()
-        new Quiz(statement: "Quem é o atual presidente do Brasil?", alternatives: ["Dilma", "Aecio", "Bolsonaro", "Lula"], correct: 0, owner: admin).save()
-        new Quiz(statement: "1+1?", alternatives: ["1", "2", "3", "4"], correct: 0, owner: admin).save()
-        new Quiz(statement: "Qual a cor do céu?", alternatives: ["Azul", "Amarelo", "Vermelho", "Laranja"], correct: 0, owner: admin).save()
-        new Quiz(statement: "Coletivo de abelha", alternatives: ["Enxame", "Alcateia", "Gado", "Cardume"], correct: 0, owner: admin).save()
+        new Quiz(statement: "O Pica-Pau pode dar quantas bicadas por minuto em uma árvore?", alternatives: ["10", "100", "1000", "10000", "NDA"], correct: "B", owner: admin).save()
+        new Quiz(statement: "Quantas vezes o Beija-Flor bate as asas por segundo?", alternatives: ["17", "5", "90", "1000", "105"], correct: "C", owner: admin).save()
+        new Quiz(statement: "O filhote de um boi recebe 3 nomes diferentes. Quais são eles?", alternatives: ["leitão, novilho ou pônei",
+                "boizinho, bezerro ou mini boi", "leitão, bezerro ou vitelo", "vitelo, bezerro ou alcatra", "NDA"], correct: "D", owner: admin).save()
 
         new Subject(name: "Matemática").save()
         new Subject(name: "Português").save()
