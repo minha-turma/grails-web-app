@@ -538,6 +538,12 @@ MIT
 @angular/forms
 MIT
 
+@ngx-loading-bar/core
+MIT
+
+@ngx-loading-bar/http-client
+MIT
+
 zone.js
 MIT
 The MIT License

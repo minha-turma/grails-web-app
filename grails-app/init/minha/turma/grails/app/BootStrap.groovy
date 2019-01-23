@@ -84,7 +84,7 @@ class BootStrap {
         new Role('ROLE_STUDENT').save()
 
         // Create test users
-        Professor admin = new Professor(name: 'Admin', username: 'admin', password: 'admin', authorities: [adminRole]).save()
+        Professor admin = new Professor(name: 'Pedro Souza', username: 'admin', password: 'admin', authorities: [adminRole]).save()
 
         // Associate users to roles
         new UserRole(user: admin, role: adminRole).save()
