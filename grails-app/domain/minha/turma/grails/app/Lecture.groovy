@@ -4,6 +4,7 @@ class Lecture {
 
     Date date
     Subject subject
+    topic String
     SchoolClass schoolClass
     User owner
     boolean isOpen = false
