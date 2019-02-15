@@ -129,13 +129,13 @@ class BootStrap {
         
         
         
-        new Subject(name: "Matemática").save()
+        /*new Subject(name: "Matemática").save()
         new Subject(name: "Português").save()
         new Subject(name: "História").save()
         new Subject(name: "Geografia").save()
         new Subject(name: "Artes").save()
         new Subject(name: "Inglês").save()
-        new Subject(name: "Ciências").save()
+        new Subject(name: "Ciências").save()*/
 
     }
     def destroy = {
