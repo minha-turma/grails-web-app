@@ -127,11 +127,7 @@ class BootStrap {
                     .addToTopics("Biologia vegetal")
                     .addToTopics("Curso intensivo: Biologia e Ecologia")
                     .save()
-        
-        
-        new Lecture(new Subject("Biologia"), "topico da aula").save();
-        
-        
+           
         
         /*new Subject(name: "Matemática").save()
         new Subject(name: "Português").save()
