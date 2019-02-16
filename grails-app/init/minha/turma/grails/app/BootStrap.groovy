@@ -90,13 +90,7 @@ class BootStrap {
         // Associate users to roles
         new UserRole(user: admin, role: adminRole).save()
 
-        new Quiz(statement: "O Pica-Pau pode dar quantas bicadas por minuto em uma árvore?", alternatives: ["10", "100", "1000", "10000", "NDA"], correct: "B", owner: admin).save()
-        new Quiz(statement: "Quantas vezes o Beija-Flor bate as asas por segundo?", alternatives: ["17", "5", "90", "1000", "105"], correct: "C", owner: admin).save()
-        new Quiz(statement: "O filhote de um boi recebe 3 nomes diferentes. Quais são eles?", alternatives: ["leitão, novilho ou pônei",
-                "boizinho, bezerro ou mini boi", "leitão, bezerro ou vitelo", "vitelo, bezerro ou alcatra", "NDA"], correct: "D", owner: admin).save()
-
-        
-        new Subject(name: "Biologia")
+        Subject sub = new Subject(name: "Biologia")
                     .addToTopics("Introdução à Biologia")
                     .addToTopics("Química da vida")
                     .addToTopics("Água, ácidos e bases")
@@ -127,7 +121,14 @@ class BootStrap {
                     .addToTopics("Biologia vegetal")
                     .addToTopics("Curso intensivo: Biologia e Ecologia")
                     .save()
-           
+
+        new Quiz(statement: "O Pica-Pau pode dar quantas bicadas por minuto em uma árvore?", subject: sub, topic: "Biodiversidade e conservação" , alternatives: ["10", "100", "1000", "10000", "NDA"], correct: "B", owner: admin, isOpen: false).save()
+        new Quiz(statement: "Quantas vezes o Beija-Flor bate as asas por segundo?", subject: sub, topic: "Biodiversidade e conservação" , alternatives: ["17", "5", "90", "1000", "105"], correct: "C", owner: admin, , isOpen: false).save()
+        new Quiz(statement: "O filhote de um boi recebe 3 nomes diferentes. Quais são eles?", subject: sub, topic: "Biodiversidade e conservação" , alternatives: ["leitão, novilho ou pônei",
+                "boizinho, bezerro ou mini boi", "leitão, bezerro ou vitelo", "vitelo, bezerro ou alcatra", "NDA"], correct: "D", owner: admin, , isOpen: false).save()
+
+        
+        
         
         /*new Subject(name: "Matemática").save()
         new Subject(name: "Português").save()
