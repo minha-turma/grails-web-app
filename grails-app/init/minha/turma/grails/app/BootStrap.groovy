@@ -33,6 +33,7 @@ class BootStrap {
             output['date'] = it.date
             output['schoolClass'] = ["id": it?.schoolClass?.id, "name": it?.schoolClass?.name]
             output['subject'] = ["id": it?.subject?.id, "name": it?.subject?.name]
+            output['topic'] = it.topic
             output['owner'] = ["id": it?.owner?.id, "name": it?.owner?.name]
             output['isOpen'] = it.isOpen
 
@@ -126,6 +127,9 @@ class BootStrap {
                     .addToTopics("Biologia vegetal")
                     .addToTopics("Curso intensivo: Biologia e Ecologia")
                     .save()
+        
+        
+        new Lecture(new Subject("Biologia"), "topico da aula").save();
         
         
         
