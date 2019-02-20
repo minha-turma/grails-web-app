@@ -64,6 +64,7 @@ class BootStrap {
         JSON.registerObjectMarshaller(Confidence) {
             def output = [:]
             output['id'] = it.id
+            output['topic'] = it.topic
             output['status'] = it.status.name
             output['student'] = ["id": it?.student?.id, "name": it?.student?.name]
             output['subject'] = ["id": it?.subject?.id, "name": it?.subject?.name]
